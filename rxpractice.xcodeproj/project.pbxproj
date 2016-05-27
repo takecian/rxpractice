@@ -13,6 +13,12 @@
 		ACDCB5CD1CF825BB000B9DA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACDCB5CC1CF825BB000B9DA9 /* Assets.xcassets */; };
 		ACDCB5D01CF825BB000B9DA9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACDCB5CE1CF825BB000B9DA9 /* LaunchScreen.storyboard */; };
 		ACDCB5DB1CF825BB000B9DA9 /* rxpracticeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDCB5DA1CF825BB000B9DA9 /* rxpracticeTests.swift */; };
+		ACDCB5EB1CF8298A000B9DA9 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACDCB5E81CF8298A000B9DA9 /* RxCocoa.framework */; };
+		ACDCB5EC1CF8298A000B9DA9 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACDCB5E91CF8298A000B9DA9 /* RxSwift.framework */; };
+		ACDCB5EE1CF82992000B9DA9 /* RxBlocking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ACDCB5E71CF8298A000B9DA9 /* RxBlocking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		ACDCB5F01CF82992000B9DA9 /* RxCocoa.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ACDCB5E81CF8298A000B9DA9 /* RxCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		ACDCB5F11CF82992000B9DA9 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACDCB5E91CF8298A000B9DA9 /* RxSwift.framework */; };
+		ACDCB5F21CF82992000B9DA9 /* RxSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ACDCB5E91CF8298A000B9DA9 /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,6 +31,22 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		ACDCB5F31CF82992000B9DA9 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				ACDCB5F01CF82992000B9DA9 /* RxCocoa.framework in Embed Frameworks */,
+				ACDCB5EE1CF82992000B9DA9 /* RxBlocking.framework in Embed Frameworks */,
+				ACDCB5F21CF82992000B9DA9 /* RxSwift.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		ACDCB5C21CF825BB000B9DA9 /* rxpractice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rxpractice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACDCB5C51CF825BB000B9DA9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -36,6 +58,9 @@
 		ACDCB5D61CF825BB000B9DA9 /* rxpracticeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = rxpracticeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACDCB5DA1CF825BB000B9DA9 /* rxpracticeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rxpracticeTests.swift; sourceTree = "<group>"; };
 		ACDCB5DC1CF825BB000B9DA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ACDCB5E71CF8298A000B9DA9 /* RxBlocking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBlocking.framework; path = Carthage/Build/iOS/RxBlocking.framework; sourceTree = "<group>"; };
+		ACDCB5E81CF8298A000B9DA9 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
+		ACDCB5E91CF8298A000B9DA9 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +68,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACDCB5EB1CF8298A000B9DA9 /* RxCocoa.framework in Frameworks */,
+				ACDCB5F11CF82992000B9DA9 /* RxSwift.framework in Frameworks */,
+				ACDCB5EC1CF8298A000B9DA9 /* RxSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +87,9 @@
 		ACDCB5B91CF825BB000B9DA9 = {
 			isa = PBXGroup;
 			children = (
+				ACDCB5E71CF8298A000B9DA9 /* RxBlocking.framework */,
+				ACDCB5E81CF8298A000B9DA9 /* RxCocoa.framework */,
+				ACDCB5E91CF8298A000B9DA9 /* RxSwift.framework */,
 				ACDCB5C41CF825BB000B9DA9 /* rxpractice */,
 				ACDCB5D91CF825BB000B9DA9 /* rxpracticeTests */,
 				ACDCB5C31CF825BB000B9DA9 /* Products */,
@@ -106,6 +137,7 @@
 				ACDCB5BE1CF825BB000B9DA9 /* Sources */,
 				ACDCB5BF1CF825BB000B9DA9 /* Frameworks */,
 				ACDCB5C01CF825BB000B9DA9 /* Resources */,
+				ACDCB5F31CF82992000B9DA9 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -327,6 +359,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = rxpractice/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.takecian.rxpractice;
@@ -338,6 +374,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = rxpractice/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.takecian.rxpractice;
@@ -388,6 +428,7 @@
 				ACDCB5E11CF825BB000B9DA9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		ACDCB5E21CF825BB000B9DA9 /* Build configuration list for PBXNativeTarget "rxpracticeTests" */ = {
 			isa = XCConfigurationList;
@@ -396,6 +437,7 @@
 				ACDCB5E41CF825BB000B9DA9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
