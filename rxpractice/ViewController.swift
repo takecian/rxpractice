@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import Alamofire
 
 class ViewController: UIViewController {
 
@@ -25,6 +26,11 @@ class ViewController: UIViewController {
 //        }.addDisposableTo(bag)
         
         textfield.rx_text.bindTo(textlabel.rx_text).addDisposableTo(bag)
+        
+        let req = DefaultHttpClient()
+        req.get(NSURL(string: "https://s3-ap-northeast-1.amazonaws.com/castownframe/frame.json")!, parameters: nil, headers: nil).subscribeNext { (data, response) in
+            print(response.statusCode)
+        }.addDisposableTo(bag)
     }
 
     override func didReceiveMemoryWarning() {
