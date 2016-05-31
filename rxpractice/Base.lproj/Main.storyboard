@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -18,26 +19,43 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Dz-sn-EeR">
-                                <rect key="frame" x="91" y="214" width="42" height="21"/>
+                                <rect key="frame" x="140" y="24" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tSM-5S-NYs">
-                                <rect key="frame" x="64" y="84" width="97" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tSM-5S-NYs">
+                                <rect key="frame" x="20" y="20" width="97" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="nin-Pt-165"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="teQ-mj-pko">
+                                <rect key="frame" x="0.0" y="58" width="600" height="542"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="teQ-mj-pko" secondAttribute="bottom" id="2zw-98-w3K"/>
+                            <constraint firstItem="teQ-mj-pko" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="6PT-nU-kEM"/>
+                            <constraint firstAttribute="trailing" secondItem="teQ-mj-pko" secondAttribute="trailing" id="X6b-yT-IGb"/>
+                            <constraint firstItem="teQ-mj-pko" firstAttribute="top" secondItem="tSM-5S-NYs" secondAttribute="bottom" constant="8" id="bb6-NP-Jq3"/>
+                            <constraint firstItem="tSM-5S-NYs" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="uFb-Zw-WZv"/>
+                            <constraint firstItem="tSM-5S-NYs" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="w5d-98-WiL"/>
+                        </constraints>
                     </view>
                     <connections>
+                        <outlet property="tableview" destination="teQ-mj-pko" id="ZNx-VM-TBX"/>
                         <outlet property="textfield" destination="tSM-5S-NYs" id="A75-eC-Oh9"/>
                         <outlet property="textlabel" destination="6Dz-sn-EeR" id="XbX-m8-IXr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="368" y="459"/>
         </scene>
     </scenes>
 </document>

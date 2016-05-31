@@ -8,36 +8,52 @@
 
 import UIKit
 import RxSwift
-import RxCocoa
-import Alamofire
 
 class ViewController: UIViewController {
 
     @IBOutlet weak var textfield: UITextField!
     @IBOutlet weak var textlabel: UILabel!
-    
-    let bag       = DisposeBag()
+    @IBOutlet weak var tableview: UITableView!
+
+    private let refresh = UIRefreshControl()
+    let disposeBag = DisposeBag()
+    let viewModel = ViewModel(client: DefaultHttpClient())
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-//        textfield.rx_text.subscribeNext { (text) in
-//            self.textlabel.text = text
-//        }.addDisposableTo(bag)
         
-        textfield.rx_text.bindTo(textlabel.rx_text).addDisposableTo(bag)
+        tableview.addSubview(refresh)
+        tableview.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         
-        let req = DefaultHttpClient()
-        req.get(NSURL(string: "https://s3-ap-northeast-1.amazonaws.com/castownframe/frame.json")!, parameters: nil, headers: nil).subscribeNext { (data, response) in
-            print(response.statusCode)
-        }.addDisposableTo(bag)
-    }
+        textfield.rx_text.bindTo(textlabel.rx_text).addDisposableTo(disposeBag)
+        
+        rx_sentMessage(#selector(UIViewController.viewWillAppear(_:)))
+            .map { _ in () }
+            .bindTo(viewModel.refreshTrigger)
+            .addDisposableTo(disposeBag)
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+        viewModel.loading.asDriver()
+            .drive(refresh.rx_refreshing)
+            .addDisposableTo(disposeBag)
+        
+        refresh.rx_controlEvent(.ValueChanged).subscribeNext { [unowned self] x -> Void in
+            self.viewModel.refreshTrigger.onNext()
+            }.addDisposableTo(disposeBag)
+        
+        tableview.rx_reachedBottom
+            .bindTo(viewModel.loadNextPageTrigger)
+            .addDisposableTo(disposeBag)
+        
+        tableview.rx_itemSelected.subscribeNext { (indexPath) in
+            self.tableview.deselectRowAtIndexPath(indexPath, animated: false)
+        }.addDisposableTo(disposeBag)
 
+        viewModel.elements.asDriver()
+            .drive(tableview.rx_itemsWithCellIdentifier("Cell")) { _, user, cell in
+                cell.textLabel?.text = user.name
+                cell.detailTextLabel?.text = user.url
+            }
+            .addDisposableTo(disposeBag)
+    }
 
 }
-

@@ -9,30 +9,50 @@ import Alamofire
 import RxSwift
 import Foundation
 
-public protocol HttpClient {
+protocol HttpClient {
     
-    func get(url: NSURL, parameters: [String:String]?, headers: [String:String]?) -> Observable<(NSData, NSHTTPURLResponse)>
+    func get(url: NSURL, parameters: [String:String]?, headers: [String:String]?) -> Observable<[User]>
     
-    func post(url: NSURL, parameters: [String:String]?, headers: [String:String]?) -> Observable<(NSData, NSHTTPURLResponse)>
+    func post(url: NSURL, parameters: [String:String]?, headers: [String:String]?) -> Observable<AnyObject>
     
 }
 
-public class DefaultHttpClient: HttpClient {
+struct User {
+    let name: String
+    let url: String
+    let avatarUrl: String
+}
+
+class DefaultHttpClient: HttpClient {
     
     private static let manager: Manager = Alamofire.Manager()
     
-    public func get (url: NSURL, parameters: [String : String]?, headers: [String : String]?) -> Observable<(NSData, NSHTTPURLResponse)> {
+    func get (url: NSURL, parameters: [String : String]?, headers: [String : String]?) -> Observable<[User]> {
         return action(Alamofire.Method.GET, url: url, parameters: parameters, headers: headers)
+            .debug()
+            .map({ (json) -> [User] in
+                guard let json = json as? [AnyObject] else { fatalError("Cast failed") }
+                return self.parseJSON(json)
+            })
     }
     
-    public func post (url: NSURL, parameters: [String:String]?, headers: [String:String]?) -> Observable<(NSData, NSHTTPURLResponse)> {
+    func post (url: NSURL, parameters: [String:String]?, headers: [String:String]?) -> Observable<AnyObject> {
         return action(.POST, url: url, parameters: parameters, headers: headers)
     }
     
-    private func action (method: Alamofire.Method, url: NSURL, parameters: [String:String]?, headers: [String:String]?) -> Observable<(NSData, NSHTTPURLResponse)> {
+    func parseJSON(json: [AnyObject]) -> [User] {
+        return json.map { result in
+            let name = result["name"] as? String ?? ""
+            let url = result["previewUrl"] as? String ?? ""
+            let avatarUrl = result["frameUrl"] as? String ?? ""
+            return User(name: name, url: url, avatarUrl: avatarUrl)
+        }
+    }
+
+    private func action (method: Alamofire.Method, url: NSURL, parameters: [String:String]?, headers: [String:String]?) -> Observable<AnyObject> {
         let request = DefaultHttpClient.manager.request(method, url, parameters: parameters, encoding: ParameterEncoding.URL).request!
         let mutableRequest = setHeader(headers, mutableRequest: request.mutableCopy() as? NSMutableURLRequest)
-        return DefaultHttpClient.manager.session.rx_response(mutableRequest!)
+        return DefaultHttpClient.manager.session.rx_JSON(mutableRequest!)
     }
     
     private func setHeader(headers: [String:String]?, mutableRequest: NSMutableURLRequest?) -> NSMutableURLRequest? {
